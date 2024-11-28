@@ -40,3 +40,6 @@ Commands to the actuators are common within each group ID and device type, named
 The value(s) sent are based on the calculation of an average index of all records from the last 60 seconds within each group. Each sensor type has an assigned handler for this business logic in the `actuator` package, which inherits from the abstract class `actuator.common.CommandPublisher`.
 
 For more details, the project is documented in the source code with Javadoc annotations.
+
+## Contact
+- For any questions or support, feel free to reach out: josegallardoharillo@gmail.com
