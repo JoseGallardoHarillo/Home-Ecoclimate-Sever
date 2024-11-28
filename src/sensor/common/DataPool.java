@@ -8,23 +8,22 @@ import java.util.stream.Collectors;
 import io.vertx.core.Future;
 
 /**
- * Indica las operaciones necesarias sobre la base de datos sin depender
- * de ninguna implementación concreta. Todos los valores devueltos son
- * inmutables.
+ * Specifies the operations needed on the database without depending
+ * on any concrete implementation. All returned values are immutable.
  *
- * @param <T> Cualquier recurso que represente un tipo de sensor
+ * @param <T> Any resource representing a sensor type
  */
 public interface DataPool<T extends Reading> {
 
 	/**
-	 * @return Todos los registros del recurso <b>T</b>
+	 * @return All records of the resource <b>T</b>
 	 */
 	public Future<Set<T>> getAll();
 	
 	/**
-	 * @param lastSeconds Segundos a abarcar
-	 * @return Todos los registros del recurso <b>T</b> de los últimos
-	 * <b>lastSeconds</b> segundos.
+	 * @param lastSeconds Seconds to cover
+	 * @return All records of the resource <b>T</b> from the last
+	 * <b>lastSeconds</b> seconds.
 	 */
 	default public Future<Set<T>> getLast(long lastSeconds) {
 		return getAll().map(r -> {
@@ -34,9 +33,9 @@ public interface DataPool<T extends Reading> {
 	}
 	
 	/**
-	 * @param groupId	Identificador de grupo de la entrada
-	 * @param sensorId	Identificador de sensor de la entrada
-	 * @return Todos los registros del recurso <b>T</b> con el identificador indicado
+	 * @param groupId	Group identifier of the entry
+	 * @param sensorId	Sensor identifier of the entry
+	 * @return All records of the resource <b>T</b> with the specified identifier
 	 */
 	default public Future<Set<T>> getById(String groupId, String sensorId) {
 		return getAll().map(
@@ -49,11 +48,11 @@ public interface DataPool<T extends Reading> {
 	}
 	
 	/**
-	 * @param groupId	Identificador de grupo de la entrada
-	 * @param sensorId	Identificador de sensor de la entrada
-	 * @param time		Marca de tiempo de la entrada
-	 * @return Registro del recurso <b>T</b> con el identificador
-	 * y la marca de tiempo indicados
+	 * @param groupId	Group identifier of the entry
+	 * @param sensorId	Sensor identifier of the entry
+	 * @param time		Timestamp of the entry
+	 * @return Record of the resource <b>T</b> with the specified identifier
+	 * and timestamp
 	 */
 	default public Future<Optional<T>> getByIdAndTime(
 		String groupId,
@@ -71,8 +70,8 @@ public interface DataPool<T extends Reading> {
 	}
 	
 	/**
-	 * @param elem Entrada a añadir al registro
-	 * @return <b>true</b> si se ha añadido el elemento, <b>false</b> si no
+	 * @param elem Entry to be added to the record
+	 * @return <b>true</b> if the element was added, <b>false</b> if not
 	 */
 	public Future<Void> add(T elem);
 
