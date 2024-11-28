@@ -23,19 +23,16 @@ import sensor.data.pools.AzureMySQL;
 import sensor.data.pools.LocalNonPersistent;
 
 /**
- * Esta clase crea un subrouter por cada tipo de recurso y los une a la raíz
- * de las rutas de la API con el nombre de la clase del tipo de recurso en
- * minúscula como prefijo.
+ * This class creates a subrouter for each resource type and binds them to the root
+ * of the API routes with the class name of the resource type in lowercase as a prefix.
  * 
- * Para introducir las credenciales de acceso a la base de datos de MySQL
- * hay que indicarlas mediante las variables de entorno <b>HOMEECOCLIMATE_DB_USER</b>
- * para el nombre de usuario y <b>HOMEECOCLIMATE_DB_PASS</b> para la contraseña.
+ * To provide the MySQL database access credentials, specify them through the environment variables 
+ * <b>HOMEECOCLIMATE_DB_USER</b> for the username and <b>HOMEECOCLIMATE_DB_PASS</b> for the password.
  * 
- * Se puede modificar la dirección y puerto por defecto del broker MQTT al
- * que se conectará el servidor, que son <b>localhost</b> y <b>1883</b>
- * respectivamente, con las variables de entorno <b>HOMEECOCLIMATE_MQTT_ADDRESS"</b>
- * y <b>HOMEECOCLIMATE_MQTT_PORT</b>. <em>Si el servidor no puede conectarse al
- * broker no se iniciará.</em>
+ * You can modify the default address and port of the MQTT broker to which the server will connect, 
+ * which are <b>localhost</b> and <b>1883</b> respectively, using the environment variables 
+ * <b>HOMEECOCLIMATE_MQTT_ADDRESS</b> and <b>HOMEECOCLIMATE_MQTT_PORT</b>. 
+ * <em>If the server cannot connect to the broker, it will not start.</em>
  */
 public class Server extends AbstractVerticle {
 	
