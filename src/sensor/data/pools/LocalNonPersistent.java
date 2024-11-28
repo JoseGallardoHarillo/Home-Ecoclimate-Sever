@@ -8,9 +8,9 @@ import sensor.common.DataPool;
 import sensor.common.Reading;
 
 /**
- * Implementación de una base de datos local genérica en memoria (sin persistencia).
+ * Implementation of a generic in-memory local database (without persistence).
  *
- * @param <T> Cualquier recurso que represente un tipo de sensor
+ * @param <T> Any resource representing a sensor type
  */
 public class LocalNonPersistent<T extends Reading> implements DataPool<T> {
 	
@@ -26,7 +26,7 @@ public class LocalNonPersistent<T extends Reading> implements DataPool<T> {
 		try {
 			return pool.add(e)
 				? Future.succeededFuture()
-				: Future.failedFuture("No se ha podido añadir el elemento " + e);
+				: Future.failedFuture("No se ha podido aÃ±adir el elemento " + e);
 		} catch (Throwable t) {
 			return Future.failedFuture(t);
 		}
