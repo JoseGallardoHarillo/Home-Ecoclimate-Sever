@@ -3,8 +3,8 @@ package sensor.common;
 import java.util.Objects;
 
 /**
- * Clase abstracta que indica los métodos estándar mínimos de cualquier registro
- * de un sensor de la placa.
+ * Abstract class that defines the minimum standard methods for any sensor record
+ * from the board.
  */
 public abstract class Reading {
 	
@@ -20,35 +20,35 @@ public abstract class Reading {
 	}
 	
 	/**
-	 * @return Identificador del grupo de sensores que envía la entrada al registro
+	 * @return Identifier of the sensor group that sends the entry to the record
 	 */
 	final public String groupId() {
 		return groupId;
 	}
 	
 	/**
-	 * @return Identificador del sensor que envía la entrada al registro
+	 * @return Identifier of the sensor that sends the entry to the record
 	 */
 	final public String sensorId() {
 		return sensorId;
 	}
 	
 	/**
-	 * @return Marca de tiempo de la entrada del registro enviada por el sensor
+	 * @return Timestamp of the record entry sent by the sensor
 	 */
 	final public long time() {
 		return time;
 	}
 	
 	/**
-	 * @param <T> Subclase de esta clase abstracta
-	 * @return Lectura con el tiempo modificado a la hora actual
+	 * @param <T> Subclass of this abstract class
+	 * @return Reading with the time modified to the current hour
 	 */
 	abstract public <T extends Reading> T withCurrentTime();
 	
 	/**
-	 * @param tableName Nombre de la tabla donde insertar esta lectura
-	 * @return Consulta de MySQL para insertar este registro en la base de datos.
+	 * @param tableName Name of the table where to insert this reading
+	 * @return MySQL query to insert this record into the database.
 	 */
 	abstract public String asSQLInsertQuery(String tableName);
 	
