@@ -15,11 +15,11 @@ import io.vertx.mqtt.MqttClient;
 import sensor.common.Reading;
 
 /**
- * Clase abstracta a implementar por cada tipo de lectura de sensor
- * para enviar los comandos MQTT que correspondan separados por
- * ID de grupo.
+ * Abstract class to be implemented by each sensor reading type
+ * to send the corresponding MQTT commands separated by
+ * group ID.
  * 
- * @param <T> Cualquier recurso que represente un tipo de sensor
+ * @param <T> Any resource representing a sensor type
  */
 public abstract class CommandPublisher<T extends Reading> {
 
@@ -31,30 +31,30 @@ public abstract class CommandPublisher<T extends Reading> {
 	}
 	
 	/**
-	 * @param series Serie de datos agrupados por el ID de grupo y sensor
-	 * @return Índice general calculado a partir de la serie de datos
+	 * @param series Data series grouped by group ID and sensor
+	 * @return General index calculated from the data series
 	 */
 	abstract protected long getIndex(Stream<? extends List<T>> series);
 	
 	/**
-	 * Método a implementar (pero no usar directamente) para realizar
-	 * el envío del mensaje MQTT que representa el comando apropiado.
-	 * Los valores no deben representar un valor numérico con un tamaño
-	 * mayor de 8 bits, sea con o sin signo.
+	 * Method to be implemented (but not used directly) to send
+	 * the MQTT message that represents the appropriate command.
+	 * The values must not represent a numerical value larger than
+	 * 8 bits, whether signed or unsigned.
 	 * 
-	 * @param groupId ID de grupo al que pertenece el índice
-	 * @param index Índice calculado por <b>getIndex</b>
-	 * @return Operación asíncrona tras enviar el comando según el índice
+	 * @param groupId Group ID to which the index belongs
+	 * @param index Index calculated by <b>getIndex</b>
+	 * @return Asynchronous operation after sending the command according to the index
 	 */
 	abstract protected Future<Void> handleIndex(String groupId, short index);
 
 	/**
-	 * Método de utilidad a ser usado solo por las clases que implementen
-	 * esta clase abstracta.
+	 * Utility method to be used only by classes that implement
+	 * this abstract class.
 	 * 
-	 * @param cmdType Tipo de comando
-	 * @param content Valor del comando
-	 * @return Valor de retorno de la publicación del mensaje MQTT
+	 * @param cmdType Command type
+	 * @param content Command value
+	 * @return Return value of the MQTT message publish
 	 */
 	final protected Future<Integer> publish(String cmdType, String content) {
 		return client.publish(
@@ -68,8 +68,8 @@ public abstract class CommandPublisher<T extends Reading> {
 	
 	
 	/**
-	 * @param series Serie de datos tomados en bruto desde la base de datos
-	 * @return Operación asíncrona tras enviar los comandos apropiados
+	 * @param series Raw data series taken from the database
+	 * @return Asynchronous operation after sending the appropriate commands
 	 */
 	final public Future<Void> sendCmds(Set<T> series) {
 		return series.stream()
